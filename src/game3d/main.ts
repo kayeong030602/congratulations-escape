@@ -705,7 +705,7 @@ function step(dt: number) {
       zoomMax: world.zoomMax,
       aim,
       gauge: Math.max(logic.holdRatio, logic.dwellRatio),
-      text: osdText,
+      text: (tape.active && tape.index) || osdText, // (11/21 추가) 옛 녹화에서 저절로 멈추면 INDEX n/4
       type: logic.typed, // (11/20 7단계) 엔딩 타자 글씨
     },
   });

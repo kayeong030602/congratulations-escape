@@ -10,6 +10,12 @@
  *   ◀◀ rew  : 3배로 시작해 2.5초에 걸쳐 10배까지 빨라져요(짧게 감을 땐 정확하게, 길게 감을 땐 금방)
  *   ▶ play  : 1배    ▶ slow : 0.25배    ❚❚ pause : 멈춤(한 장씩 넘기기)    ▶▶ ff : rew와 같은 빠르기로 앞으로
  *   맨 앞에 닿으면 멈춤, 앞으로 가다 끝(=지금)에 닿으면 녹화 화면으로(main.ts).
+ *
+ * (11/21 8단계 ② 추가, 사용자 결정 — 플레이 테스트: 돌아다닌 장면 사이에서 옛 녹화만 딱 찾아 멈추기 어려움)
+ *   INDEX 멈춤 — 실제 VHS 캠코더의 INDEX 검색처럼. 방 데이터의 clip 행동에 index(영상 안 몇 초)가 있으면
+ *   ◀◀·▶▶로 감다가 그 자리를 지나치는 순간 거기에 딱 맞춰 ❚❚ 멈춰요(화면에 INDEX n/4).
+ *   멈춘 자리에서 ◀◀ = 앞 장면, ▶▶ = 다음 장면에서 또 멈춤 → 첫 장면에서 ◀◀ 한 번 더면 그 앞으로 평소처럼 계속.
+ *   PC ← →도 옛 녹화 안에선 한 장면씩(그 밖에선 한 장씩). 다른 대목의 빠르기(3→10배)는 그대로예요.
  */
 import { TRANSPORT, next, type Transport, type TransportEvent } from '../engine/machine.ts';
 import { Recorder, type Pose, type Segment } from './recorder.ts';
@@ -20,6 +26,14 @@ const BASE: Record<Transport, number> = { rew: -3, play: 1, slow: 0.25, pause: 0
 const FAST = { max: 10, ramp: 2.5 };
 /** 멈춤에서 한 장 = 기록 한 번(1/15초). */
 const FRAME = 1 / 15;
+
+/**
+ * (11/21 추가) 영상 파일 → INDEX 멈춤 자리(영상 안 초). 논리가 clip 행동을 실행할 때 채워요(logic.ts).
+ * 테이프는 이번에 켠 뒤의 녹화만 담으니, 테이프에 찍힌 영상은 늘 여기 있어요.
+ */
+export const CLIP_INDEX = new Map<string, number[]>();
+/** 한 영상의 INDEX 자리들(테이프 시각, 차례대로). */
+interface Marks { at: number[] }
 
 /** 재생 위치의 모습(세계가 그리는 데 써요). since = 그 사건부터 흐른 테이프 시간(초). */
 export interface TapeView {
@@ -55,6 +69,8 @@ export class TapePlayer {
   transport: Transport = 'rew';
   private held = 0; // 지금 ◀◀·▶▶를 이어 온 시간(빨라지기)
   private walk: Float32Array | null = null;
+  /** (11/21 추가) 테이프에 찍힌 영상마다의 INDEX 멈춤 자리(테이프 시각). */
+  private marks: Marks[] = [];
 
   get active(): boolean { return !!this.seg; }
   get len(): number { return this.seg?.len ?? 0; }
@@ -66,11 +82,29 @@ export class TapePlayer {
     this.transport = 'rew';
     this.held = 0;
     this.walk = Recorder.walked(seg);
+    this.marks = [];
+    for (const e of seg.events) {
+      if (e.kind !== 'act' || e.id !== 'clip' || !e.arg) continue;
+      const idx = CLIP_INDEX.get(e.arg);
+      if (idx?.length) this.marks.push({ at: idx.map((t) => e.at + t).filter((t) => t <= seg.len) });
+    }
+    this.marks = this.marks.filter((m) => m.at.length);
   }
 
   stop() {
     this.seg = null;
     this.walk = null;
+    this.marks = [];
+  }
+
+  /** (11/21 추가) 멈춰 있는 INDEX 자리: "INDEX 2/4"(아니면 null). */
+  get index(): string | null {
+    if (!this.seg || this.transport !== 'pause') return null;
+    for (const m of this.marks) {
+      const i = m.at.findIndex((t) => Math.abs(t - this.head) < 1e-3);
+      if (i >= 0) return `INDEX ${i + 1}/${m.at.length}`;
+    }
+    return null;
   }
 
   /** 테이프 버튼. 표에 없는 조합은 무시돼요. */
@@ -85,7 +119,12 @@ export class TapePlayer {
   step(dir: 1 | -1) {
     if (this.transport !== 'pause') return;
     if (dir > 0) this.press('STEP');
-    this.head = Math.max(0, Math.min(this.len, this.head + dir * FRAME));
+    // (11/21 추가) 옛 녹화 안(첫 자리 ~ 마지막 자리 둘레)에선 한 장면씩
+    const h = this.head;
+    const m = this.marks.find((m) => h >= m.at[0] - 0.35 && h <= m.at[m.at.length - 1] + 0.35);
+    const jump = m && (dir > 0 ? m.at.find((t) => t > h + 1e-3) : [...m.at].reverse().find((t) => t < h - 1e-3));
+    if (jump !== undefined) { this.head = jump; return; }
+    this.head = Math.max(0, Math.min(this.len, h + dir * FRAME));
   }
 
   get speed(): number {
@@ -100,7 +139,17 @@ export class TapePlayer {
     if (!this.seg) return null;
     if (this.transport === 'rew' || this.transport === 'ff') this.held += dt;
     const v = this.speed;
+    const prev = this.head;
     this.head += v * dt;
+    // (11/21 추가) INDEX 자리를 지나치면 거기에 딱 맞춰 멈춰요(뒤로 감을 땐 가장 가까운 뒤쪽, 앞으로 감을 땐 가장 가까운 앞쪽)
+    if (this.transport === 'rew' || this.transport === 'ff') {
+      let hit: number | null = null;
+      for (const m of this.marks) for (const t of m.at) {
+        if (v < 0 && t >= this.head && t < prev - 1e-4 && (hit === null || t > hit)) hit = t;
+        if (v > 0 && t <= this.head && t > prev + 1e-4 && (hit === null || t < hit)) hit = t;
+      }
+      if (hit !== null) { this.head = hit; this.press('PAUSE'); return null; }
+    }
     if (this.head <= 0) {
       this.head = 0;
       if (this.transport === 'rew') this.press('HIT_START');

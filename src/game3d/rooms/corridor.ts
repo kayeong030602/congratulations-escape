@@ -30,6 +30,9 @@ const base = (id: string, at: [number, number], size: [number, number]): Box => 
  *           z=7.6 └────────┘
  *                  흰 벽(정면)
  */
+/** (11/21 8단계 ③ 추가) 하얀 방 벽이 사라진 뒤 위쪽 문구(개조식, 사용자 결정) */
+const SIGN_GOAL = '안내도 줌 인 해서 확인'; // (11/21 3차) 띄어쓰기 "줌 인 해서"(사용자 결정)
+
 export const corridor: Room = {
   id: 'corridor',
   title: '하얀 방·통로',
@@ -93,6 +96,8 @@ export const corridor: Room = {
         { do: 'timer', timer: 'hint' },
         { do: 'timer', timer: 'open' },
       ],
+      // (11/21 8단계 ③) 이어 하기로 다시 들어왔는데 아직 안 읽었으면 위쪽 문구를 다시
+      else: [{ do: 'if', when: { not: { flag: 'signRead' } }, then: [{ do: 'goal', text: SIGN_GOAL }] }],
     },
   ],
 
@@ -102,13 +107,15 @@ export const corridor: Room = {
       length: { ms: 1200 },
       // (11/17 변경) 폰 글씨를 화면 왼쪽·오른쪽 순서로
       // (11/17 변경) 개조식으로(시작 화면 조작 안내와 같은 말투)
-      end: [{ do: 'hint', text: '마우스 둘러보기 · WASD 걷기', touch: '왼쪽 밀어 걷기 · 오른쪽 밀어 둘러보기' }],
+      // (11/21 8단계 ② 변경, 플레이 테스트 의견: 폰에서 톡 쳐서 조사할 수 있다는 걸 몰랐음) 끝에 "조사"를 더함
+      end: [{ do: 'hint', text: '마우스 둘러보기 · WASD 걷기 · 클릭 조사', touch: '왼쪽 밀어 걷기 · 오른쪽 밀어 둘러보기 · 클릭해서 조사' }], // (11/21 3차) ~~대상 톡 조사~~ → 사용자 결정
     },
     // 나가는 길 = 뒤를 돌아보기. 벽은 안 보는 사이에 사라지고, 등 뒤에서 험이 들려와요
     open: {
       length: { ms: 5000 }, // (11/17 변경) 3.5초 → 5초(사용자 의견)
       // (11/17 변경) 벽이 사라질 때 지지직 효과음은 뺐어요(사용자 의견: 소리 없이 사라지는 게 나음). 험만 들려오기 시작
-      end: [{ do: 'set', flag: 'whiteOpen' }, { do: 'amb', sound: 'hum' }],
+      // (11/21 8단계 ③ 추가, 플레이 테스트 의견: 안내판에서 다들 막힘) 벽이 사라지는 순간 위쪽에 대놓고 안내 — 읽으면 지움
+      end: [{ do: 'set', flag: 'whiteOpen' }, { do: 'amb', sound: 'hum' }, { do: 'goal', text: SIGN_GOAL }],
     },
     // (11/20 5차 추가) 안내판 줌 안내를 띄운 뒤 20초 지나면 다시 띄울 수 있게(그사이 또 헤매면)
     signhint: { length: { ms: 20_000 }, end: [{ do: 'set', flag: 'sign.hinted', off: true }] },
@@ -131,6 +138,7 @@ export const corridor: Room = {
       // (11/16 변경) 한 번만 → 다시 줌하면 또 읽혀요(다시 읽어 보고 싶을 수 있어서). 메모는 처음 한 번만 더해져요
       do: [
         { do: 'set', flag: 'signRead' },
+        { do: 'goal' }, // (11/21) 위쪽 안내 문구 지움
         { do: 'note', note: 'sign' },
       ],
       // (11/20 5차 추가, 사용자 의견) 헤맬 때만 줌 안내: 아직 안 읽었을 때, 줌 없이 누르거나(폰은 톡) 줌을 안 당긴 채 2.5초 조준하면

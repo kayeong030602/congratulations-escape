@@ -72,6 +72,8 @@ const G0 = '파란 손바닥에 손 대기';
 /** 코발트 손자국 뒤 문구와, 1분 뒤 그 자리를 바꾸는 문구 — 설계서 확정안. (11/19 2차 변경) 아래에 더하지 않고 바꿔요 */
 const G1 = '기쁨은 붙잡을 새도 없이 엉킨 채 스쳐 지나간다.';
 const G2 = '벽에 남은 색의 무게를 덜어내면, 엉켜 있던 해가 제자리를 찾는다.';
+/** (11/21 8단계 ③ 추가, 사용자 결정) G2 아래 한 줄 더 — 정답은 글자 하나(were)라는 힌트 */
+const G3 = '모든 글자가 모여도, 진실이 되는 것은 단 하나뿐.';
 
 /**
  * 틀림(설계서 4.2: 문구 없음). (11/19 2차 변경, 사용자 의견: 음악만 끊기면 오류 같음)
@@ -242,7 +244,7 @@ const RESTART: Action[] = [
   { do: 'sound', sound: 'sfx.alarm' },
   { do: 'sound', sound: 'sfx.thud', at: FAR_END },
   // 두 번 넘게 실패했을 때만 보험 힌트(설계서 3.1)
-  { do: 'if', when: { count: 'fails.lockdoor', gte: 2 }, then: [{ do: 'hint', text: '빛을 마주해야 해답이 보인다.' }] },
+  { do: 'if', when: { count: 'fails.lockdoor', gte: 2 }, then: [{ do: 'hint', text: '빛은 너를 돕지만, 오래 바라보는 순간 너를 배신할 것이다.' }] }, // (11/21 8단계 ③ 변경, 사용자 결정) ~~빛을 마주해야 해답이 보인다.~~ — 빛만 보다 문을 잊어서
   { do: 'timer', timer: 'chase' },
 ];
 
@@ -528,8 +530,11 @@ export const warm: Room = {
         { do: 'set', flag: 'warm.played' },
         { do: 'sound', sound: 'sfx.memory' },
         { do: 'sound', sound: 'sfx.mlaugh' },
-        { do: 'clip', clip: 'warm/old.mp4' },
+        // (11/21 8단계 ②) index = 테이프에서 저절로 멈추는 자리(4장면의 가운데, 장면 0.6초씩 — scripts/assets.config.ts의 shots)
+        { do: 'clip', clip: 'warm/old.mp4', index: [0.3, 0.9, 1.5, 2.1] },
         { do: 'if', when: { not: { flag: 'warm.told' } }, then: [{ do: 'set', flag: 'warm.told' }, { do: 'goal', text: G1 }, { do: 'timer', timer: 'hint2' }] },
+        // (11/21 8단계 ② 변경, 사용자 결정) 되감기는 여기서 처음 열려요(~~포스트잇의 방 정전 뒤~~)
+        { do: 'set', flag: 'tape' },
         TAPE_HINT,
       ],
     },
@@ -627,7 +632,7 @@ export const warm: Room = {
     // 문 앞에서 한참 안 열면 조작 안내(개조식)
     doorhint: { length: { ms: 9000 }, end: [{ do: 'hint', text: '손잡이 조준 · 길게 누르기', touch: '손잡이 길게 누르기' }] },
     // (11/19 2차 변경) ~~아래에 한 줄 더~~ → 첫 문구 자리를 바꿔요(사용자 의견)
-    hint2: { length: { ms: 60_000 }, end: [{ do: 'goal', text: G2, strong: true }] }, // (11/19 3차) 노랗게 빛나는 글씨
+    hint2: { length: { ms: 60_000 }, end: [{ do: 'goal', text: G2, strong: true }, { do: 'goal', text: G3, add: true }] }, // (11/19 3차) 노랗게 빛나는 글씨
     // (11/19 6단계 추가) 잠긴 문 앞에서 한참 손잡이를 안 누르면 조작 안내(개조식)
     knobhint: { length: { ms: 9000 }, end: [{ do: 'if', when: { not: { count: 'lock.try', gte: 1 } }, then: [{ do: 'hint', text: '손잡이 조준 · 누르기', touch: '손잡이 톡' }] }] },
     // (11/19 6단계 추가) 다가오는 불 = 타이머. 끝없는 복도의 먼 불 12개는 짧게 차르르(0.9 → 0.4초), 걸을 수 있는 복도의 ①~⑤는 한 칸에 5초.
@@ -641,8 +646,8 @@ export const warm: Room = {
   },
 
   enter: [
-    // 이 방에 왔다면 포스트잇의 방에서 되감기가 이미 열렸어요(?room=warm으로 바로 시작해도 되감기를 쓸 수 있게)
-    { do: 'set', flag: 'tape' },
+    // ~~이 방에 왔다면 포스트잇의 방에서 되감기가 이미 열렸어요~~ (11/21 변경) 옛 녹화를 본 뒤에만(이어 하기·?room=warm)
+    { do: 'if', when: PLAYED, then: [{ do: 'set', flag: 'tape' }] },
     // 이어 하기·다시 들어올 때 지금 상태에 맞는 소리와 문구로
     { do: 'if', when: { not: { flag: 'warm.open' } }, then: [{ do: 'timer', timer: 'doorhint' }] },
     {

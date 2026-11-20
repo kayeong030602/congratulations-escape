@@ -21,6 +21,7 @@ import {
 } from '../engine/machine.ts';
 import type { Action, Cond, Fx, Room, RoomId, Save, Spawn, Target } from './schema.ts';
 import { testCond, type Snapshot, type StateEvent } from './state.ts';
+import { CLIP_INDEX } from './tape.ts';
 
 export type { StateEvent } from './state.ts';
 
@@ -230,7 +231,9 @@ export class Logic {
   /** roomId를 주면 그 방에서 새로, 안 주면 저장된 곳(없으면 처음)에서. */
   async start(roomId?: RoomId, dev?: { spawn?: string; flags?: string[]; counts?: Record<string, number> }) {
     const saved = roomId ? null : Logic.loadSave();
-    if (saved) this.restore(saved, true);
+    // (11/21 8단계 ③ 고침) 이어 하기: 저장된 체크포인트를 그대로(이름 tag 포함) 써요. 전엔 이름 없이 새로 찍어서
+    //   잠긴 문 앞에서 이어 한 뒤 실패하면 횟수가 fails.warm에 세어져 → 손잡이부터 다시·보험 문구 안 나옴(사용자 발견)
+    if (saved) { this.restore(saved, true); this.checkpoint = saved; }
     // (11/20 추가) 개발용 바로가기: 그 방의 다른 자리에서, 플래그를 켠 채로(예: 따뜻한 방을 푼 뒤 잠긴 문 앞)
     for (const f of dev?.flags ?? []) this.flags.add(f);
     Object.assign(this.counts, dev?.counts ?? {}); // (11/20 7단계) 개수도(계단 마지막 바퀴 stair.floor:5)
@@ -272,7 +275,7 @@ export class Logic {
     this.notes = new Set(s.notes);
     this.done = new Set(s.done);
     this.tapeSec = s.tapeSec;
-    if (withStats) this.stats = { ...s.stats, rewinds: s.stats.rewinds ?? 0 }; // (11/20) 전에 저장한 것엔 rewinds가 없어요
+    if (withStats) this.stats = { ...s.stats, rewinds: s.stats.rewinds ?? 0 }; // (11/20) 전에 저장한 것엔 rewinds가 없어요 // (11/20) 전에 저장한 것엔 rewinds가 없어요
   }
 
   /** 체크포인트를 브라우저에 남겨요. (11/18 추가) 개발용 시험 방(dev)은 안 남겨요. */
@@ -448,6 +451,7 @@ export class Logic {
         case 'clip': {
           // (11/18 추가) 영상은 테이프에도 실사로 찍혀요: 실제로 화면에 나오기 시작한 순간과 끝난 순간을 적어요
           const onTape = a.tape !== false;
+          if (a.index) CLIP_INDEX.set(a.clip, a.index); // (11/21 추가) 테이프의 INDEX 멈춤 자리
           this.lock();
           await this.world.clip(a.clip, onTape ? () => this.emit('act', 'clip', undefined, a.clip) : undefined);
           if (onTape) this.emit('act', 'clip-end', undefined, a.clip);
