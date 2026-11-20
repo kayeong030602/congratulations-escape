@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'VCR';
+  src: url('/fonts/VCR_OSD_MONO.ttf') format('truetype');
+}
+
+* { box-sizing: border-box; border-radius: 0; }
+[hidden] { display: none !important; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: #000;
+  color: #e8e8e8;
+  font: 13px/1.5 'VCR', ui-monospace, Consolas, monospace;
+  display: flex;
+  overflow: hidden;
+}
+
+/* 4:3 화면을 가운데에, 남는 자리는 검은 띠 */
+.stage {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  place-items: center;
+}
+
+#screen {
+  width: min(100%, calc(100vh * 4 / 3));
+  aspect-ratio: 4 / 3;
+  max-height: 100vh;
+  display: block;
+  touch-action: none;
+  user-select: none;
+}
+
+/* ── 시험용 표시 ── */
+#dev {
+  width: 300px;
+  flex: none;
+  border-left: 1px solid #333;
+  padding: 12px;
+  overflow-y: auto;
+  background: #0a0a0a;
+}
+
+#dev h1 { font-size: 13px; font-weight: normal; margin: 0 0 8px; color: #fff; }
+#dev small { color: #777; }
+#dev pre { margin: 0 0 10px; white-space: pre-wrap; word-break: break-all; font: inherit; }
+#status { color: #cfd3ff; }
+#log { color: #8a8a8a; border-top: 1px solid #333; padding-top: 8px; }
+.keys { color: #666; margin: 0; }
+
+#buttons { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+
+button {
+  font: inherit;
+  color: #e8e8e8;
+  background: #151515;
+  border: 1px solid #333;
+  padding: 5px 9px;
+  cursor: pointer;
+}
+
+button:hover { background: #0e13b0; border-color: #0e13b0; }
+
+@media (max-width: 800px) {
+  body { flex-direction: column; overflow: auto; }
+  .stage { flex: none; }
+  #dev { width: 100%; border-left: 0; border-top: 1px solid #333; }
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <!-- (11/20 추가) 아이폰: 사파리 공유 → "홈 화면에 추가"로 연 아이콘은 주소창·도구 막대 없이 화면 가득(사파리 페이지는 스스로 전체 화면이 될 수 없어요) -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="congratulations!" />
+  <meta name="theme-color" content="#000000" />
+  <title>congratulations!</title>
+  <link rel="stylesheet" href="/src/game3d/play.css" />
+</head>
+<body>
+  <div id="stage">
+    <canvas id="screen"></canvas>
+    <!-- 캠코더 글씨(REC ●, 줌 막대 …)는 3D 화면에 찍혀서 같이 번져요(src/game3d/screen/osd.ts).
+         여기 HTML은 번지면 안 되는 것만: 줌 막대 터치 영역(보이지 않음), 한국어 알림 -->
+    <div class="ui">
+      <!-- (11/17 추가) 화면 위쪽의 한국어 안내 문구(방 데이터의 goal 행동). 네모 칸은 찾은 개수만큼 채워져요 -->
+      <div class="goal" id="goal" hidden><p class="lines"></p><p class="boxes"></p></div>
+      <span class="zoom" id="zoom"></span>
+      <span class="msg" id="msg"></span>
+      <!-- (11/18 추가) 되감기: 폰 버튼(녹화 중 ◀◀ 하나 / 테이프를 볼 때 한 줄)과 PC 키 안내. 보일 때는 main.ts가 정해요 -->
+      <button class="rew" id="rew" type="button" aria-label="되감기" hidden><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M11 1 2 8l9 7zM22 1l-9 7 9 7z"/></svg></button>
+      <div class="tapebar" id="tapebar" hidden>
+        <button type="button" data-k="rew" aria-label="되감기"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M11 1 2 8l9 7zM22 1l-9 7 9 7z"/></svg></button>
+        <button type="button" data-k="play" aria-label="재생"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M8 1v14l11-7z"/></svg></button>
+        <button type="button" data-k="pause" aria-label="멈춤"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M7 1h3.5v14H7zM13.5 1H17v14h-3.5z"/></svg></button>
+        <button type="button" data-k="slow" aria-label="느리게">SLOW</button>
+        <button type="button" data-k="ff" aria-label="빨리 감기"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="m2 1 9 7-9 7zM13 1l9 7-9 7z"/></svg></button>
+        <button type="button" data-k="stop" aria-label="녹화 화면으로"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M6.5 2h11v12h-11z"/></svg></button>
+      </div>
+      <p class="tapekeys" id="tapekeys" hidden>R 되감기 · Space 재생/멈춤 · S 느리게 · F 빨리 감기 · ← → 한 장씩 · Q 녹화 화면</p>
+    </div>
+    <!-- 시작·멈춤: 파란 VCR 화면과 PLAY ▶ / PAUSE ❚❚는 셰이더가 그려요. 여기는 한국어 안내만(화면 아래쪽).
+         (11/17 추가) 소리가 중요한 게임이라 시작 화면에 소리·이어폰 안내(멈춤 화면에선 숨김) -->
+    <div id="start">
+      <!-- (11/20 추가, 사용자 결정) 카카오톡·네이버 등 앱 속 브라우저로 열었을 때만(main.ts): 기본 브라우저 권장 + 다른 브라우저로 열기 -->
+      <div class="inapp" id="inapp" hidden>
+        <p>앱 속 브라우저 · 인트로·소리·전체 화면이 막힐 수 있음</p>
+        <p>Safari · Chrome · 삼성 인터넷 권장</p>
+        <button type="button" id="inapp-open">다른 브라우저로 열기</button>
+      </div>
+      <p class="sound">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="13" width="5" height="8" rx="1.5" fill="currentColor"/><rect x="16" y="13" width="5" height="8" rx="1.5" fill="currentColor"/></svg>
+        소리 켜기 · 이어폰 착용 권장
+      </p>
+      <!-- (11/20 추가, 사용자 결정) 폰을 세로로 들었을 때만(play.css): 4:3 화면이 작아서 -->
+      <p class="rotate">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="1.6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M18.5 9.5v5" stroke="currentColor" stroke-width="1.6"/></svg>
+        가로 화면 권장
+      </p>
+      <p id="start-text">화면을 눌러 시작</p>
+      <!-- 기기에 맞는 줄만 보여요(play.css). (11/19 추가) .tapekey = 되감기 키 — 되감기가 열린 뒤에만(main.ts가 #start에 tape를 붙여요) -->
+      <p class="keys pc">WASD 걷기 · Shift 뛰기 · 마우스 둘러보기 · 휠 줌 · 클릭 누르기<span class="tapekey"> · R 되감기</span> · Esc 멈춤</p>
+      <p class="keys touch">왼쪽 절반 밀어 걷기(끝까지 밀면 뛰기) · 오른쪽 절반 밀어 둘러보기 · 왼쪽 아래 막대로 줌 · 대상을 톡 쳐서 조사<span class="tapekey"> · ◀◀ 버튼 되감기</span></p>
+    </div>
+  </div>
+  <!-- (11/20 7단계 추가) 끝 화면: 기록·출처·방 이름의 뜻(src/game3d/end.ts가 채워요). 화면 전체를 덮는 파란 VCR 화면 -->
+  <div id="end" hidden></div>
+  <!-- (11/20 추가, 사용자 결정) 폰 걷기 막대: 왼쪽 엄지를 댄 자리에 흐린 동그라미(4:3 화면 밖 검은 자리에서도 — main.ts) -->
+  <div id="stick" hidden><i></i></div>
+  <pre id="stat" hidden></pre>
+  <script type="module" src="/src/game3d/main.ts"></script>
+</body>
+</html>

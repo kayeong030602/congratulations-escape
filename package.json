@@ -1,0 +1,23 @@
+{
+  "name": "congratulations-escape",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "assets": "node scripts/build-assets.ts",
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "@types/three": "^0.187.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.8"
+  },
+  "dependencies": {
+    "ogl": "^1.0.11",
+    "three": "^0.187.0"
+  }
+}

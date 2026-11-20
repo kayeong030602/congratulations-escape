@@ -1,0 +1,497 @@
+[
+ {
+  "file": "intro/title.mp4",
+  "kind": "loop",
+  "bytes": 1327005,
+  "dur": 3.7
+ },
+ {
+  "file": "intro/loading.mp4",
+  "kind": "clip",
+  "bytes": 1142369,
+  "dur": 3
+ },
+ {
+  "file": "intro/error.mp4",
+  "kind": "clip",
+  "bytes": 717291,
+  "dur": 4
+ },
+ {
+  "file": "intro/intro.mp3",
+  "kind": "audio",
+  "bytes": 112995,
+  "dur": 7
+ },
+ {
+  "file": "intro/full.mp4",
+  "kind": "clip",
+  "bytes": 1647436,
+  "dur": 10.5
+ },
+ {
+  "file": "intro/full.mp3",
+  "kind": "audio",
+  "bytes": 167329,
+  "dur": 10.39
+ },
+ {
+  "file": "white/a.webp",
+  "kind": "still",
+  "bytes": 32760
+ },
+ {
+  "file": "white/b.webp",
+  "kind": "still",
+  "bytes": 25454
+ },
+ {
+  "file": "white/m-a-b.mp4",
+  "kind": "clip",
+  "bytes": 174338,
+  "dur": 1
+ },
+ {
+  "file": "white/m-out.mp4",
+  "kind": "clip",
+  "bytes": 309205,
+  "dur": 1.2
+ },
+ {
+  "file": "corridor/hall.webp",
+  "kind": "still",
+  "bytes": 32382
+ },
+ {
+  "file": "corridor/m-sign.mp4",
+  "kind": "clip",
+  "bytes": 524981,
+  "dur": 3
+ },
+ {
+  "file": "corridor/sign.webp",
+  "kind": "still",
+  "bytes": 38964
+ },
+ {
+  "file": "corridor/m-corner.mp4",
+  "kind": "clip",
+  "bytes": 565078,
+  "dur": 2.5
+ },
+ {
+  "file": "corridor/corner.webp",
+  "kind": "still",
+  "bytes": 54868
+ },
+ {
+  "file": "corridor/m-out.mp4",
+  "kind": "clip",
+  "bytes": 498947,
+  "dur": 1.3
+ },
+ {
+  "file": "postit/corner.webp",
+  "kind": "still",
+  "bytes": 69756
+ },
+ {
+  "file": "postit/m-corner-ceiling.mp4",
+  "kind": "clip",
+  "bytes": 491505,
+  "dur": 1.7
+ },
+ {
+  "file": "postit/ceiling.webp",
+  "kind": "still",
+  "bytes": 68192
+ },
+ {
+  "file": "postit/m-ceiling-wall.mp4",
+  "kind": "clip",
+  "bytes": 672128,
+  "dur": 2.2
+ },
+ {
+  "file": "postit/wall.webp",
+  "kind": "still",
+  "bytes": 78564
+ },
+ {
+  "file": "postit/m-wall-whites.mp4",
+  "kind": "clip",
+  "bytes": 362433,
+  "dur": 1.2
+ },
+ {
+  "file": "postit/whites.webp",
+  "kind": "still",
+  "bytes": 63026
+ },
+ {
+  "file": "postit/behind.webp",
+  "kind": "still",
+  "bytes": 27966
+ },
+ {
+  "file": "postit/m-behind-wall.mp4",
+  "kind": "clip",
+  "bytes": 326486,
+  "dur": 1.1
+ },
+ {
+  "file": "postit/wall-gone.webp",
+  "kind": "still",
+  "bytes": 96430
+ },
+ {
+  "file": "postit/m-andyou-in.mp4",
+  "kind": "clip",
+  "bytes": 751020,
+  "dur": 1.9
+ },
+ {
+  "file": "postit/andyou.webp",
+  "kind": "still",
+  "bytes": 58614
+ },
+ {
+  "file": "postit/peel.mp4",
+  "kind": "clip",
+  "bytes": 874305,
+  "dur": 2.2
+ },
+ {
+  "file": "postit/reddot.webp",
+  "kind": "still",
+  "bytes": 64864
+ },
+ {
+  "file": "postit/tape-enter.mp4",
+  "kind": "tape",
+  "bytes": 358869,
+  "dur": 3.6
+ },
+ {
+  "file": "postit/tape-enter.rev.mp4",
+  "kind": "tape",
+  "bytes": 200375,
+  "dur": 3.6
+ },
+ {
+  "file": "postit/tape-whites.mp4",
+  "kind": "tape",
+  "bytes": 644823,
+  "dur": 3.9
+ },
+ {
+  "file": "postit/tape-whites.rev.mp4",
+  "kind": "tape",
+  "bytes": 300237,
+  "dur": 3.9
+ },
+ {
+  "file": "postit/tape-behind.mp4",
+  "kind": "tape",
+  "bytes": 517329,
+  "dur": 4.6
+ },
+ {
+  "file": "postit/tape-behind.rev.mp4",
+  "kind": "tape",
+  "bytes": 289671,
+  "dur": 4.6
+ },
+ {
+  "file": "sound/hum.mp3",
+  "kind": "audio",
+  "bytes": 387178,
+  "dur": 32.2
+ },
+ {
+  "file": "sound/click.mp3",
+  "kind": "audio",
+  "bytes": 10537,
+  "dur": 0.6
+ },
+ {
+  "file": "sound/whip.mp3",
+  "kind": "audio",
+  "bytes": 18851,
+  "dur": 1.1
+ },
+ {
+  "file": "sound/whip-back.mp3",
+  "kind": "audio",
+  "bytes": 15507,
+  "dur": 0.9
+ },
+ {
+  "file": "sound/andyou-pop.mp3",
+  "kind": "audio",
+  "bytes": 10537,
+  "dur": 0.6
+ },
+ {
+  "file": "sound/peel.mp3",
+  "kind": "audio",
+  "bytes": 17224,
+  "dur": 1
+ },
+ {
+  "file": "sound/flip.mp3",
+  "kind": "audio",
+  "bytes": 10537,
+  "dur": 0.6
+ },
+ {
+  "file": "sound/voice-behind.mp3",
+  "kind": "audio",
+  "bytes": 21596,
+  "dur": 1.7
+ },
+ {
+  "file": "sound/voice-follow.mp3",
+  "kind": "audio",
+  "bytes": 29120,
+  "dur": 2.35
+ },
+ {
+  "file": "sound/bitshift.mp3",
+  "kind": "audio",
+  "bytes": 3074176,
+  "dur": 192.052
+ },
+ {
+  "file": "sound/bitshift-end.mp3",
+  "kind": "audio",
+  "bytes": 2304819,
+  "dur": 191.96
+ },
+ {
+  "file": "sound/flicker.mp3",
+  "kind": "audio",
+  "bytes": 24858,
+  "dur": 2.009
+ },
+ {
+  "file": "sound/lights-out.mp3",
+  "kind": "audio",
+  "bytes": 25137,
+  "dur": 2
+ },
+ {
+  "file": "sound/lights-on.mp3",
+  "kind": "audio",
+  "bytes": 17284,
+  "dur": 1.38
+ },
+ {
+  "file": "postit/n-hurry.webp",
+  "kind": "crop",
+  "bytes": 5038,
+  "dur": null
+ },
+ {
+  "file": "postit/n-this-way.webp",
+  "kind": "crop",
+  "bytes": 6270,
+  "dur": null
+ },
+ {
+  "file": "postit/n-no-that-way.webp",
+  "kind": "crop",
+  "bytes": 6470,
+  "dur": null
+ },
+ {
+  "file": "postit/n-just-follow.webp",
+  "kind": "crop",
+  "bytes": 7826,
+  "dur": null
+ },
+ {
+  "file": "postit/n-too-late.webp",
+  "kind": "crop",
+  "bytes": 5562,
+  "dur": null
+ },
+ {
+  "file": "postit/n-andyou.webp",
+  "kind": "crop",
+  "bytes": 11040,
+  "dur": null
+ },
+ {
+  "file": "warm/s-hand.webp",
+  "kind": "still",
+  "bytes": 56926
+ },
+ {
+  "file": "warm/s-text.webp",
+  "kind": "still",
+  "bytes": 43334
+ },
+ {
+  "file": "warm/hand.webp",
+  "kind": "crop",
+  "bytes": 4474,
+  "dur": null
+ },
+ {
+  "file": "warm/text.webp",
+  "kind": "crop",
+  "bytes": 5470,
+  "dur": null
+ },
+ {
+  "file": "warm/old.mp4",
+  "kind": "memory",
+  "bytes": 1160245,
+  "dur": 2.4
+ },
+ {
+  "file": "sound/zoom.mp3",
+  "kind": "audio",
+  "bytes": 31390,
+  "dur": 2.56
+ },
+ {
+  "file": "sound/door-creak.mp3",
+  "kind": "audio",
+  "bytes": 24808,
+  "dur": 2
+ },
+ {
+  "file": "sound/laugh.mp3",
+  "kind": "audio",
+  "bytes": 117281,
+  "dur": 9.7
+ },
+ {
+  "file": "sound/memory.mp3",
+  "kind": "audio",
+  "bytes": 22300,
+  "dur": 1.8
+ },
+ {
+  "file": "sound/montage-laugh.mp3",
+  "kind": "audio",
+  "bytes": 26062,
+  "dur": 2.1
+ },
+ {
+  "file": "sound/dreamy.mp3",
+  "kind": "audio",
+  "bytes": 1520502,
+  "dur": 126.616
+ },
+ {
+  "file": "sound/wrong.mp3",
+  "kind": "audio",
+  "bytes": 6940,
+  "dur": 0.5
+ },
+ {
+  "file": "sound/thud.mp3",
+  "kind": "audio",
+  "bytes": 12896,
+  "dur": 1
+ },
+ {
+  "file": "sound/alarm.wav",
+  "kind": "audio",
+  "bytes": 441678,
+  "dur": 9.2
+ },
+ {
+  "file": "sound/chew.mp3",
+  "kind": "audio",
+  "bytes": 20106,
+  "dur": 1.6
+ },
+ {
+  "file": "sound/key-try1.mp3",
+  "kind": "audio",
+  "bytes": 15090,
+  "dur": 1.2
+ },
+ {
+  "file": "sound/key-try2.mp3",
+  "kind": "audio",
+  "bytes": 7880,
+  "dur": 0.6
+ },
+ {
+  "file": "sound/key-try3.mp3",
+  "kind": "audio",
+  "bytes": 12896,
+  "dur": 1
+ },
+ {
+  "file": "sound/keys-drop.mp3",
+  "kind": "audio",
+  "bytes": 11642,
+  "dur": 0.9
+ },
+ {
+  "file": "sound/keys-jingle.mp3",
+  "kind": "audio",
+  "bytes": 12896,
+  "dur": 1
+ },
+ {
+  "file": "sound/red-key.mp3",
+  "kind": "audio",
+  "bytes": 15090,
+  "dur": 1.2
+ },
+ {
+  "file": "sound/unlock.mp3",
+  "kind": "audio",
+  "bytes": 7880,
+  "dur": 0.6
+ },
+ {
+  "file": "sound/door-open.mp3",
+  "kind": "audio",
+  "bytes": 22300,
+  "dur": 1.8
+ },
+ {
+  "file": "sound/slam.mp3",
+  "kind": "audio",
+  "bytes": 15090,
+  "dur": 1.2
+ },
+ {
+  "file": "sound/slam-boom.mp3",
+  "kind": "audio",
+  "bytes": 20106,
+  "dur": 1.6
+ },
+ {
+  "file": "sound/voice-key.mp3",
+  "kind": "audio",
+  "bytes": 46437,
+  "dur": 3.8
+ },
+ {
+  "file": "sound/voice-donot.mp3",
+  "kind": "audio",
+  "bytes": 28883,
+  "dur": 2.34
+ },
+ {
+  "file": "stairs/congrats.webp",
+  "kind": "letters",
+  "bytes": 49860,
+  "dur": null
+ },
+ {
+  "file": "sound/gates.mp3",
+  "kind": "audio",
+  "bytes": 960827,
+  "dur": 80
+ }
+]

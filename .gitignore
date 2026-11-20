@@ -1,0 +1,13 @@
+node_modules/
+dist/
+# 원본에서 뽑은 중간 파일(크고, 공개하지 않음)
+assets-src/
+# Manus 인수인계용 묶음 파일(다시 만들 수 있음)
+handover/
+*.log
+.DS_Store
+Thumbs.db
+
+# (11/20 8단계) 공개 저장소에 올리지 않는 내부 문서(이 PC에만 둠)
+CLAUDE.md
+docs/

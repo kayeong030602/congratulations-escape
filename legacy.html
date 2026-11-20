@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>congratulations! — 2.5D 보관본</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <!-- (11/17 변경) 2.5D 시제품 보관본. 본 게임(3D)은 index.html로 옮겼어요. 마감 안에 3D가 안 되면 대신 낼 수 있게 남겨 둬요 -->
+  <div class="stage">
+    <canvas id="screen"></canvas>
+  </div>
+
+  <!-- 시험용 표시: 다음 단계에서 캠코더 OSD(REC ●, 카운터, 줌 막대)로 바뀔 자리 -->
+  <aside id="dev">
+    <h1>시험용 표시 <small>(OSD로 바뀔 자리)</small></h1>
+    <pre id="status"></pre>
+    <div id="buttons"></div>
+    <pre id="log"></pre>
+    <p class="keys">
+      끌기·방향키 = 둘러보기 / S = 뒤돌아보기 / 휠·+− = 줌 / R = 되감기<br />
+      테이프: ← → Space L . / P = 일시정지 / H = 클릭 영역 보기
+    </p>
+  </aside>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

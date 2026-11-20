@@ -1,0 +1,46 @@
+# GitHub Pages 배포 (11/20 8단계)
+# main 가지에 올릴(push) 때마다 GitHub 서버가 알아서 빌드(npm run build) → dist/ 를 Pages에 올려요.
+# Actions 탭에서 "Run workflow" 버튼으로 손으로 다시 돌릴 수도 있어요.
+# 주소: https://<GitHub 아이디>.github.io/congratulations-escape/  (vite.config.ts 의 base 와 저장소 이름이 같아야 해요)
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 두 번 연달아 올리면 앞의 배포는 끝까지 하고, 그다음 것을 해요
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

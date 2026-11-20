@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>3D 시험 방 — congratulations-escape</title>
+  <link rel="stylesheet" href="/src/lab3d/lab3d.css" />
+</head>
+<body>
+  <div id="stage">
+    <canvas id="screen"></canvas>
+    <div class="osd" id="osd">
+      <span class="rec" id="rec">REC ●</span>
+      <span class="clock">12:00</span>
+      <span class="sp">SP</span>
+      <span class="zoom">W <i id="zoomBar"><b id="zoomDot"></b></i> T</span>
+      <span class="focus" id="focus"></span>
+      <span class="msg" id="msg"></span>
+    </div>
+    <div id="start">
+      <p class="big">3D 시험 방</p>
+      <p>화면을 누르면 시작해요<br />(마우스가 화면에 잠겨요 · Esc로 풀기)</p>
+      <p class="keys">
+        WASD 걷기 · 마우스 둘러보기 · 휠 줌<br />
+        V VHS 켜기/끄기 · G 구운 조명 켜기/끄기 · B 흔들림 · 1/2 해상도
+      </p>
+    </div>
+  </div>
+  <pre id="stat"></pre>
+  <script type="module" src="/src/lab3d/main.ts"></script>
+</body>
+</html>

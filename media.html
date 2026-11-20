@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>소재 확인 — congratulations-escape</title>
+  <link rel="stylesheet" href="/src/media-check.css" />
+</head>
+<body>
+  <main>
+    <section class="screen">
+      <div class="stage" id="stage">
+        <video id="vA" muted playsinline></video>
+        <video id="vB" muted playsinline></video>
+        <img id="img" alt="" />
+        <div class="osd">
+          <span class="rec" id="osdState">REC ●</span>
+          <span class="clock">12:00</span>
+          <span class="counter" id="osdCounter">0:00:00</span>
+          <span class="sp">SP</span>
+        </div>
+      </div>
+      <div class="transport" id="transport" hidden>
+        <button data-t="rew">◀◀</button>
+        <button data-t="play">▶</button>
+        <button data-t="slow">▶ 1/4</button>
+        <button data-t="pause">⏸</button>
+        <button data-t="step">한 프레임 ▷</button>
+      </div>
+      <div class="transport" id="shakeBar" hidden>
+        <button id="shakeBtn" class="active">손떨림 켜짐</button>
+      </div>
+      <p class="info" id="info">왼쪽 목록에서 소재를 눌러 보세요.</p>
+    </section>
+    <nav id="list"></nav>
+  </main>
+  <script type="module" src="/src/media-check.ts"></script>
+</body>
+</html>
