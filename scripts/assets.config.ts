@@ -192,4 +192,7 @@ export const JOBS: Job[] = [
   // ── (11/20 7단계 추가) 엔딩 — congratulations! 문이 열리면 차오르는 드론(영화 엔딩과 같은 구간: 74.5초 무렵의 부풀어 오름이 문과 만나요) ──
   // "The Gates of Heaven" Jovica (CC BY 4.0) — 크레딧·끝 화면에 표기
   { out: 'sound/gates.mp3', kind: 'audio', src: `${D}/엔딩 파란화면 카피 크레딧/84791__jovica__layers-011-the-gates-of-heaven-98.flac`, from: 74.5, to: 154.5, mono: true, fadeOut: 4 },
+
+  // ── (11/26 추가) 졸전 아이패드 키오스크(public/kiosk.html) 왼쪽에 반복 재생하는 단편 최종본 — 편집은 그대로, 용량만 줄임(음소거 자동 재생이라 소리 없음) ──
+  { out: 'kiosk/film.mp4', kind: 'clip', src: SRC.final, from: 0, to: 117.57, w: 800 }, // 960은 26.8MB라 800(25MB 이하 기준)
 ];

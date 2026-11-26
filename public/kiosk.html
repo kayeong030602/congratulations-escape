@@ -150,18 +150,15 @@
           <!-- Default Preview Reel -->
           <div id="previewReel" class="relative w-full h-full bg-black flex items-center justify-center">
             <img id="previewImg" src="" alt="congratulations! preview frame" class="w-full h-full object-cover" />
-            <div id="previewBadge" class="absolute bottom-11 left-1/2 -translate-x-1/2 z-20 bg-black/80 border border-white/20 px-3 py-1 text-[11px] sm:text-xs text-[#e8e7e2] tracking-tight whitespace-nowrap">
-              미리보기 릴 재생 중 · 하단 [영상 불러오기]로 MP4 연결
-            </div>
           </div>
 
           <!-- Camcorder OSD Overlay -->
           <div class="pointer-events-none absolute inset-0 z-20 p-3.5 sm:p-5 flex flex-col justify-between font-vcr text-[#f4f3ee]/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.95)]">
             <div class="flex items-start justify-between text-base sm:text-xl">
-              <button id="secretUnlockBtn" type="button" class="pointer-events-auto flex items-center gap-2 focus:outline-none" title="잠금 해제 시 3번 탭">
+              <div class="flex items-center gap-2">
                 <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#e53935] rec-dot"></span>
                 <span id="osdPlayState">PLAY ▷</span>
-              </button>
+              </div>
               <div class="text-right leading-tight">
                 <div id="osdTimecode">SLP 00:00:00</div>
                 <div class="text-xs sm:text-sm text-[#f4f3ee]/70">4:3 · VHS · LEVEL 0</div>
@@ -184,11 +181,9 @@
 
       <!-- LEVEL 0 Mint Header Bar (Directly inspired by CUT 07 Floor Guide) -->
       <div class="bg-[#7fd1b9] text-[#141517] px-4 py-2.5 border-b-2 border-[#16171a] flex items-center justify-between shrink-0">
-        <div class="flex items-center gap-2">
-          <span class="font-vcr text-2xl sm:text-[26px] leading-none font-bold tracking-wider">LEVEL 0</span>
-        </div>
-        <div class="text-right leading-tight">
-          <div class="font-vcr text-xs sm:text-sm tracking-widest opacity-85">FLOOR GUIDE // 0¾</div>
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="inline-block rounded-full bg-[#e53935] w-2.5 h-2.5 shrink-0"></span>
+          <span class="font-vcr text-2xl sm:text-[26px] leading-none font-bold tracking-wide whitespace-nowrap">congratulations! <span class="text-lg sm:text-xl opacity-75">(escape)</span></span>
         </div>
       </div>
 
@@ -197,10 +192,6 @@
 
         <!-- Title & Red Dot Indicator -->
         <div class="hidden lg:block w-full text-center">
-          <div class="inline-flex items-center gap-1.5 text-xs font-vcr tracking-widest text-[#16171a]/70 mb-1">
-            <span class="inline-block w-2 h-2 rounded-full bg-[#e53935]"></span>
-            <span>YOU ARE HERE</span>
-          </div>
           <h1 class="font-vcr text-[26px] xl:text-[30px] text-[#141517] leading-none tracking-wider">
             TRY TO ESCAPE THE MAZE
           </h1>
@@ -220,7 +211,7 @@
           </div>
           <div class="mt-2.5 text-center">
             <div class="font-vcr text-base sm:text-lg text-[#141517] tracking-wider leading-none">
-              PLAY THE GAME<span class="cursor-block">█</span>
+              <span class="inline-block rounded-full bg-[#e53935] w-2 h-2 align-middle mr-1.5 -mt-0.5"></span>PLAY THE GAME<span class="cursor-block">█</span>
             </div>
             <div class="font-vcr text-[12px] sm:text-[13px] text-[#4a4c52] mt-0.5 break-all">
               kayeong030602.github.io/congratulations-escape
@@ -230,11 +221,6 @@
 
         <!-- Minimal Analog Instruction Box (Safari Fullscreen & Landscape Guide) -->
         <div class="flex-1 lg:flex-none w-full bg-[#e7e6e0] border border-[#16171a]/25 p-3 space-y-2 text-left">
-          <div class="flex items-center justify-between border-b border-[#16171a]/15 pb-1">
-            <span class="font-vcr text-xs tracking-widest text-[#16171a]/75">PLEASE FOLLOW THE INSTRUCTIONS</span>
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#e53935]"></span>
-          </div>
-
           <div class="flex items-start gap-2">
             <span class="font-vcr text-sm text-[#e53935] leading-tight shrink-0">[01]</span>
             <p class="text-[11px] sm:text-xs text-[#16171a] leading-snug">
@@ -259,6 +245,16 @@
               사운드 ON 권장 (이어폰 착용 시 몰입감 UP)
             </p>
           </div>
+
+          <!-- (추가) 막혔을 때 공략 QR — guide.html이 노션 공략집으로 넘겨줘요(노션 주소는 guide.html에서 바꿈) -->
+          <div class="flex items-center gap-2">
+            <span class="font-vcr text-sm text-[#e0a526] leading-tight shrink-0">[04]</span>
+            <div class="flex-1 text-[11px] sm:text-xs text-[#16171a] leading-snug">
+              <div class="font-bold">막혔다면?</div>
+              <div class="text-[#4a4c52]">QR을 찍어 공략집 보기</div>
+            </div>
+            <div class="bg-white border border-[#16171a] p-1 w-[68px] aspect-square shrink-0"><svg style="display:block;width:100%;height:100%;shape-rendering:crispEdges" viewBox="0 0 33 33" class="segno"><path class="qrline" stroke="#000" d="M0 0.5h7m2 0h1m6 0h6m1 0h1m2 0h7m-33 1h1m5 0h1m1 0h2m1 0h2m1 0h2m2 0h1m7 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m2 0h3m2 0h3m3 0h2m4 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m5 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m3 0h1m1 0h2m2 0h5m2 0h1m2 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m1 0h1m1 0h1m2 0h5m2 0h1m1 0h1m1 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h1m2 0h1m5 0h1m2 0h1m-25 1h5m1 0h5m1 0h3m2 0h1m4 0h4m1 0h1m1 0h1m1 0h1m-32 1h1m1 0h4m2 0h2m3 0h1m2 0h5m2 0h1m1 0h3m2 0h3m-33 1h1m1 0h1m2 0h5m1 0h2m2 0h3m3 0h1m2 0h1m3 0h2m1 0h1m-32 1h2m1 0h3m1 0h5m3 0h2m1 0h1m1 0h3m7 0h1m-30 1h3m2 0h2m1 0h1m1 0h1m1 0h5m1 0h1m2 0h1m4 0h3m-30 1h2m1 0h1m1 0h1m2 0h3m1 0h1m1 0h1m1 0h1m2 0h2m2 0h1m1 0h2m4 0h2m-31 1h3m1 0h5m3 0h5m1 0h1m1 0h1m4 0h2m2 0h1m-32 1h4m4 0h2m2 0h1m3 0h1m3 0h3m1 0h3m1 0h1m1 0h1m-31 1h3m1 0h1m1 0h1m1 0h3m1 0h4m1 0h2m1 0h1m2 0h2m2 0h2m2 0h1m-30 1h1m5 0h1m4 0h1m2 0h5m2 0h1m1 0h2m2 0h1m1 0h2m-33 1h1m1 0h1m1 0h3m3 0h3m1 0h3m5 0h1m5 0h2m1 0h1m-31 1h1m7 0h1m1 0h1m2 0h1m1 0h1m3 0h4m4 0h1m1 0h1m-29 1h1m2 0h7m1 0h2m2 0h1m2 0h1m1 0h1m1 0h1m2 0h2m2 0h1m-32 1h2m1 0h3m2 0h2m2 0h2m4 0h4m1 0h1m1 0h2m2 0h1m1 0h2m-33 1h1m1 0h1m3 0h1m1 0h1m5 0h3m3 0h1m3 0h2m3 0h1m1 0h1m-32 1h1m1 0h4m1 0h2m1 0h1m1 0h1m2 0h2m4 0h3m2 0h1m2 0h2m-31 1h1m1 0h1m2 0h4m1 0h1m1 0h1m2 0h1m1 0h1m4 0h7m3 0h1m-25 1h3m5 0h1m2 0h2m3 0h1m3 0h1m3 0h1m-33 1h7m1 0h1m1 0h3m2 0h1m1 0h2m3 0h3m1 0h1m1 0h2m1 0h1m-32 1h1m5 0h1m2 0h3m3 0h1m3 0h1m1 0h2m1 0h1m3 0h4m-32 1h1m1 0h3m1 0h1m1 0h2m1 0h1m3 0h3m2 0h1m1 0h1m1 0h5m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h2m2 0h1m1 0h3m6 0h2m1 0h1m-31 1h1m1 0h3m1 0h1m1 0h3m2 0h6m1 0h1m1 0h1m1 0h3m2 0h3m-32 1h1m5 0h1m1 0h3m1 0h2m1 0h1m3 0h3m1 0h1m5 0h2m-31 1h7m1 0h1m1 0h1m1 0h1m1 0h2m1 0h1m4 0h1m1 0h1m2 0h3m1 0h1"/></svg></div>
+          </div>
         </div>
       </div>
 
@@ -272,38 +268,6 @@
       </div>
     </aside>
   </div>
-
-  <!-- Discreet Exhibition Setup Toolbar (Hidden in Kiosk Lock Mode) -->
-  <footer id="setupBar" class="shrink-0 w-full bg-[#0e0f0e] border-t border-white/10 px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-xs">
-    <div class="flex items-center gap-2 flex-wrap">
-      <label class="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-[#7fd1b9]/15 hover:bg-[#7fd1b9]/25 border border-[#7fd1b9]/50 text-[#7fd1b9] font-medium transition">
-        <span>[📂] 영상 불러오기 (MP4)</span>
-        <input id="videoFileInput" type="file" accept="video/mp4,video/quicktime,video/*" class="hidden" />
-      </label>
-
-      <button id="btnToggleMute" type="button" class="px-3 py-1.5 rounded-sm bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-200 transition">
-        음소거 해제
-      </button>
-
-      <button id="btnTogglePlay" type="button" class="px-3 py-1.5 rounded-sm bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-200 transition">
-        ❚❚ 일시정지
-      </button>
-
-      <button id="btnFullscreen" type="button" class="px-3 py-1.5 rounded-sm bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-200 transition">
-        ⛶ 전체화면
-      </button>
-    </div>
-
-    <div class="flex items-center gap-2">
-      <span id="statusMsg" class="hidden sm:inline text-zinc-500">MP4 선택 시 무한 반복 · 좌측 상단 [● PLAY] 3번 탭으로 잠금 해제</span>
-      <button id="btnLockKiosk" type="button" class="px-3 py-1.5 rounded-sm bg-[#f1f0eb] hover:bg-[#7fd1b9] text-[#141517] font-bold transition">
-        🔒 전시 모드 잠금
-      </button>
-    </div>
-  </footer>
-
-  <!-- Toast notification -->
-  <div id="toast" class="hidden fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-[#16171a]/95 border border-[#7fd1b9]/60 text-[#f1f0eb] text-xs sm:text-sm px-4 py-2 rounded-sm shadow-2xl"></div>
 
   <script>
     const PREVIEW_FRAMES = [
@@ -321,36 +285,12 @@
     const videoEl = document.getElementById('kioskVideo');
     const previewReel = document.getElementById('previewReel');
     const previewImg = document.getElementById('previewImg');
-    const previewBadge = document.getElementById('previewBadge');
-    const videoFileInput = document.getElementById('videoFileInput');
-    const btnToggleMute = document.getElementById('btnToggleMute');
-    const btnTogglePlay = document.getElementById('btnTogglePlay');
-    const btnFullscreen = document.getElementById('btnFullscreen');
-    const btnLockKiosk = document.getElementById('btnLockKiosk');
-    const setupBar = document.getElementById('setupBar');
-    const osdPlayState = document.getElementById('osdPlayState');
     const osdTimecode = document.getElementById('osdTimecode');
-    const osdAudioBadge = document.getElementById('osdAudioBadge');
-    const statusMsg = document.getElementById('statusMsg');
-    const toast = document.getElementById('toast');
-    const secretUnlockBtn = document.getElementById('secretUnlockBtn');
 
     let isVideoLoaded = false;
-    let isLocked = false;
     let previewIdx = 0;
-    let previewPaused = false;
     let previewSeconds = 0;
     let previewTimer = null;
-    let currentObjectUrl = null;
-    let secretTapCount = 0;
-    let secretTapTimer = null;
-
-    function showToast(msg, ms = 3200) {
-      toast.textContent = msg;
-      toast.classList.remove('hidden');
-      clearTimeout(showToast._t);
-      showToast._t = setTimeout(() => toast.classList.add('hidden'), ms);
-    }
 
     function formatTimecode(sec) {
       const s = Math.floor(sec || 0);
@@ -364,7 +304,7 @@
       previewImg.src = PREVIEW_FRAMES[0];
       clearInterval(previewTimer);
       previewTimer = setInterval(() => {
-        if (isVideoLoaded || previewPaused) return;
+        if (isVideoLoaded) return;
         previewIdx = (previewIdx + 1) % PREVIEW_FRAMES.length;
         previewImg.classList.remove('preview-fade');
         void previewImg.offsetWidth;
@@ -376,96 +316,39 @@
     setInterval(() => {
       if (isVideoLoaded) {
         osdTimecode.textContent = formatTimecode(videoEl.currentTime);
-      } else if (!previewPaused) {
+      } else {
         previewSeconds = (previewSeconds + 1) % 124;
         osdTimecode.textContent = formatTimecode(previewSeconds);
       }
     }, 1000);
 
-    videoFileInput.addEventListener('change', (e) => {
-      const file = e.target.files && e.target.files[0];
-      if (!file) return;
-      if (currentObjectUrl) URL.revokeObjectURL(currentObjectUrl);
-      currentObjectUrl = URL.createObjectURL(file);
-      videoEl.src = currentObjectUrl;
-      videoEl.classList.remove('hidden');
-      previewReel.classList.add('hidden');
-      isVideoLoaded = true;
-      videoEl.play().catch(() => {});
-      osdPlayState.textContent = 'PLAY ▷';
-      btnTogglePlay.textContent = '❚❚ 일시정지';
-      statusMsg.textContent = `연결됨: ${file.name}`;
-      showToast(`"${file.name}" 무한 반복 재생을 시작합니다.`);
-    });
-
-    btnToggleMute.addEventListener('click', () => {
-      if (!isVideoLoaded) {
-        showToast('먼저 [영상 불러오기]로 MP4 파일을 선택해 주세요.');
-        return;
-      }
-      videoEl.muted = !videoEl.muted;
-      btnToggleMute.textContent = videoEl.muted ? '음소거 해제' : '🔊 사운드 ON';
-      osdAudioBadge.textContent = videoEl.muted ? 'AUDIO: MUTED' : 'AUDIO: ON';
-    });
-
-    btnTogglePlay.addEventListener('click', () => {
-      if (isVideoLoaded) {
-        if (videoEl.paused) {
-          videoEl.play().catch(() => {});
-          btnTogglePlay.textContent = '❚❚ 일시정지';
-          osdPlayState.textContent = 'PLAY ▷';
-        } else {
-          videoEl.pause();
-          btnTogglePlay.textContent = '▶ 재생';
-          osdPlayState.textContent = 'PAUSE ❚❚';
-        }
-      } else {
-        previewPaused = !previewPaused;
-        btnTogglePlay.textContent = previewPaused ? '▶ 재생' : '❚❚ 일시정지';
-        osdPlayState.textContent = previewPaused ? 'PAUSE ❚❚' : 'PLAY ▷';
-      }
-    });
-
-    btnFullscreen.addEventListener('click', () => {
-      const docEl = document.documentElement;
-      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        if (docEl.requestFullscreen) {
-          docEl.requestFullscreen().catch(() => showToast('iPad Safari에서는 [공유 → 홈 화면에 추가]로 실행하면 완벽한 전체화면이 됩니다.'));
-        } else if (docEl.webkitRequestFullscreen) {
-          docEl.webkitRequestFullscreen();
-        } else {
-          showToast('iPad Safari에서는 [공유 → 홈 화면에 추가]로 실행하면 완벽한 전체화면이 됩니다.');
-        }
-      } else {
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-      }
-    });
-
-    btnLockKiosk.addEventListener('click', () => {
-      isLocked = true;
-      setupBar.classList.add('hidden');
-      previewBadge.classList.add('hidden');
-      showToast('전시 모드 잠금 완료! 다시 열려면 좌측 상단 [● PLAY]를 3번 탭하세요.', 4000);
-    });
-
-    secretUnlockBtn.addEventListener('click', () => {
-      if (!isLocked) return;
-      secretTapCount++;
-      clearTimeout(secretTapTimer);
-      secretTapTimer = setTimeout(() => { secretTapCount = 0; }, 900);
-      if (secretTapCount >= 3) {
-        isLocked = false;
-        secretTapCount = 0;
-        setupBar.classList.remove('hidden');
-        if (!isVideoLoaded) previewBadge.classList.remove('hidden');
-        showToast('설정 바가 다시 열렸습니다.');
-      }
-    });
-
     window.onload = () => {
       startPreviewReel();
     };
+
+    // 단편 최종본을 자동으로 불러와 무한 반복 재생. 와이파이가 끊겨도 계속 돌게 처음 한 번 통째로 받아 메모리에서 재생해요.
+    // 받는 동안·못 받으면 미리보기 릴이 그대로 보여요.
+    fetch('media/kiosk/film.mp4')
+      .then((r) => (r.ok ? r.blob() : Promise.reject(r.status)))
+      .then((blob) => {
+        videoEl.src = URL.createObjectURL(blob);
+        videoEl.classList.remove('hidden');
+        previewReel.classList.add('hidden');
+        isVideoLoaded = true;
+        videoEl.play().catch(() => {});
+      })
+      .catch(() => {});
+
+    // 전체 화면: 홈 화면 아이콘으로 열면 처음부터 전체 화면이에요. 사파리 탭으로 열었다면 화면을 한 번 만지면 전체 화면이 돼요
+    // (브라우저는 사람이 화면을 만지기 전에는 전체 화면을 막아요). 저전력 모드로 영상이 멈춰 있었으면 그때 다시 재생해요.
+    addEventListener('pointerdown', () => {
+      const d = document.documentElement;
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        const go = d.requestFullscreen || d.webkitRequestFullscreen;
+        if (go) Promise.resolve(go.call(d)).catch(() => {});
+      }
+      if (isVideoLoaded && videoEl.paused) videoEl.play().catch(() => {});
+    });
   </script>
 </body>
 </html>

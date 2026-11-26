@@ -1,0 +1,27 @@
+<!doctype html>
+<!-- (11/26 추가) 졸전 키오스크의 작은 QR "막혔을 때 · 공략"이 여는 주소. 노션 공략 페이지로 넘겨줘요.
+     노션 주소가 정해지면 아래 NOTION 한 줄만 바꾸면 돼요(QR은 이 페이지 주소라 다시 안 뽑아도 됨).
+     노션 페이지는 "공유 → 웹에 게시"를 켜야 로그인 없이 열려요. -->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>congratulations! — 공략</title>
+<style>
+  @font-face { font-family: 'VCR'; src: url('fonts/VCR_OSD_MONO.ttf') format('truetype'); }
+  html, body { margin: 0; height: 100%; background: #0e13b0; color: #e9ecff; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; font-family: system-ui, sans-serif; text-align: center; padding: 0 24px; box-sizing: border-box; }
+  b { font-family: 'VCR', monospace; font-weight: normal; font-size: 22px; letter-spacing: 0.08em; }
+  p { margin: 0; opacity: 0.8; }
+</style>
+</head>
+<body>
+<b>GUIDE</b>
+<p id="msg">공략 준비 중</p>
+<script>
+  // ← 노션 공략집 "congratulations! (Escape) Guide". 노션에서 "웹에 게시"를 켜야 로그인 없이 열려요(게시 주소 https://….notion.site/…로 바꿔도 됨)
+  const NOTION = 'https://www.notion.so/424304e0ed4f806cbd2added786f9891';
+  if (NOTION) { document.getElementById('msg').textContent = '공략 페이지로 이동 중'; location.replace(NOTION); }
+</script>
+</body>
+</html>

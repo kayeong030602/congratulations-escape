@@ -493,5 +493,11 @@
   "kind": "audio",
   "bytes": 960827,
   "dur": 80
+ },
+ {
+  "file": "kiosk/film.mp4",
+  "kind": "clip",
+  "bytes": 20377372,
+  "dur": 117.567
  }
 ]
